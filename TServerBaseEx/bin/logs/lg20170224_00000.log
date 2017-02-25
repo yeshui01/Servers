@@ -1,0 +1,4 @@
+2:[DEBUG][2017/2/24 17:17:16]this is [DEBUG] log
+3:[NOTIFY][2017/2/24 17:17:16]this is [NOTIFY] log
+4:[WARN][2017/2/24 17:17:16]this is [WARNNIG] log
+5:[ERROR][2017/2/24 17:17:16]this is [ERROR] log
