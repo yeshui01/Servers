@@ -32,11 +32,27 @@ MESSAGE(status ,"/usr/lib64/")
 FILE(GLOB LOG_SRC ${PROJECT_SOURCE_DIR}/tlog/*.cpp)
 FILE(GLOB MAIN_SRC ${PROJECT_SOURCE_DIR}/Test/*.cpp)
 
+FILE(GLOB BASE_SERVER_SRC ${PROJECT_SOURCE_DIR}/tbase_server/*.cpp)
+FILE(GLOB BASE_CONFIG_SRC ${PROJECT_SOURCE_DIR}/tbase_config/*.cpp)
+FILE(GLOB CONFIG_SRC ${PROJECT_SOURCE_DIR}/tconfig/*.cpp)
+FILE(GLOB CONNECTION_SRC ${PROJECT_SOURCE_DIR}/tconnection/*.cpp)
+FILE(GLOB MYSQLPOOL_SRC ${PROJECT_SOURCE_DIR}/tmysqlpool/*.cpp)
+FILE(GLOB PACKET_SRC ${PROJECT_SOURCE_DIR}/tpacket/*.cpp)
+FILE(GLOB SERVICEPOOL_SRC ${PROJECT_SOURCE_DIR}/tservice_pool/*.cpp)
+FILE(GLOB SINGLETON_SRC ${PROJECT_SOURCE_DIR}/tsingleton/*.cpp)
+FILE(GLOB SOCKET_SRC ${PROJECT_SOURCE_DIR}/tsocket/*.cpp)
+FILE(GLOB SYNERGYWORKER_SRC ${PROJECT_SOURCE_DIR}/tsynergy_worker/*.cpp)
+FILE(GLOB TIMER_SRC ${PROJECT_SOURCE_DIR}/ttimer/*.cpp)
+FILE(GLOB TIMETOOL_SRC ${PROJECT_SOURCE_DIR}/ttimetool/*.cpp)
+FILE(GLOB UTILITY_SRC ${PROJECT_SOURCE_DIR}/tutility/*.cpp)
+
+
+
 #生成可执行文件
-ADD_EXECUTABLE(test.out ${LOG_SRC} ${MAIN_SRC})
+ADD_EXECUTABLE(test.out ${LOG_SRC} ${MAIN_SRC} ${BASE_SERVER_SRC} ${BASE_CONFIG_SRC} ${CONFIG_SRC} ${CONNECTION_SRC} ${MYSQLPOOL_SRC} ${PACKET_SRC} ${SERVICEPOOL_SRC} ${SINGLETON_SRC} ${SOCKET_SRC} ${SYNERGYWORKER_SRC} ${TIMER_SRC} ${TIMETOOL_SRC} ${UTILITY_SRC} ${MYSQLPOOL_SRC})
 
 #链接库文件
-TARGET_LINK_LIBRARIES(test.out libboost_system.so libboost_log.so libboost_log_setup.so libboost_thread.so libpthread.so)
+TARGET_LINK_LIBRARIES(test.out libboost_system.so libboost_log.so libboost_log_setup.so libboost_thread.so libpthread.so libboost_chrono.so libmysqlcppconn.so)
 
 #设置输出路径
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

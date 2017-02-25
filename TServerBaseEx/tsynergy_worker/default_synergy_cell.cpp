@@ -16,7 +16,7 @@ DefaultSynergyCell::DefaultSynergyCell(uint32 cell_id, boost::shared_ptr<TConnec
 SynergyCell(cell_id), 
 connection_ptr_(conn)
 {
-  LOGGER(INFO) << "DefaultSynergyCell::DefaultSynergyCell, con_addr=" << (int)conn.get();
+  LOGGER(INFO) << "DefaultSynergyCell::DefaultSynergyCell, con_addr=" << (long long)conn.get();
 
 }
 

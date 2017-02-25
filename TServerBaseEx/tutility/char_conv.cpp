@@ -5,6 +5,8 @@
  * date   : $time$
  * brief  :
  *******************************************************************************/
+#ifdef WIN32
+
 
 #include <stdlib.h>
 #include <Windows.h>
@@ -47,3 +49,5 @@ size_t EncodingConv::Gb2312ToUtf8(std::string const & in_str, std::string &out_s
 }
 
 }  // namespace tyh
+
+#endif

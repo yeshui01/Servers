@@ -9,7 +9,7 @@
 #define __TYH_TYPEDEF_H__
 
 #include <cstdint>
-
+#include <stddef.h>
 typedef int8_t	  int8;
 typedef uint8_t   uint8;
 
