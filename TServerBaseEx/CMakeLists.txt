@@ -10,6 +10,7 @@ INCLUDE_DIRECTORIES(/usr/local/include/boost/)
 INCLUDE_DIRECTORIES(/usr/local/include/)
 INCLUDE_DIRECTORIES(/usr/include/)
 INCLUDE_DIRECTORIES(/usr/include/cppconn/)
+INCLUDE_DIRECTORIES(../ThirdParty/jsoncpp/include/)
 
 #打印消息
 MESSAGE(status ,"---设置头文件包含路径----")
@@ -18,12 +19,14 @@ MESSAGE(status ,"/usr/local/include/boost/")
 MESSAGE(status ,"/usr/local/include/")
 MESSAGE(status ,"/usr/include/")
 MESSAGE(status ,"/usr/include/cppconn/")
+MESSAGE(status ,"../ThirdParty/jsoncpp/include/")
 
 #设置库文件包含路径
 LINK_DIRECTORIES(/usr/local/lib/)
 LINK_DIRECTORIES(/usr/local/lib64/)
 LINK_DIRECTORIES(/usr/lib/)
 LINK_DIRECTORIES(/usr/lib64/)
+#LINK_DIRECTORIES(../ThirdParty/jsoncpp/lib/)
 
 MESSAGE(status ,"---设置库文件包含路径----")
 MESSAGE(status ,"/usr/local/lib/")
@@ -47,5 +50,9 @@ FILE(GLOB SYNERGYWORKER_SRC ${PROJECT_SOURCE_DIR}/tsynergy_worker/*.cpp)
 FILE(GLOB TIMER_SRC ${PROJECT_SOURCE_DIR}/ttimer/*.cpp)
 FILE(GLOB TIMETOOL_SRC ${PROJECT_SOURCE_DIR}/ttimetool/*.cpp)
 FILE(GLOB UTILITY_SRC ${PROJECT_SOURCE_DIR}/tutility/*.cpp)
+
+#静态库文件
+#SET(JSONCPPLIB ../ThirdParty/jsoncpp/lib/libjson_linux-gcc-4.8.5_libmt.a)
+FIND_LIBRARY(JSONCPP_LIB libjson.a ${PROJECT_SOURCE_DIR}/3lib/ NO_DEFAULT_PATH)
 
 ADD_SUBDIRECTORY(Test)

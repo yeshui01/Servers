@@ -595,6 +595,30 @@ __/tutility/char_conv.cpp.s:
 	cd /home/tyh/MyGit/Servers/TServerBaseEx && $(MAKE) -f Test/CMakeFiles/test.out.dir/build.make Test/CMakeFiles/test.out.dir/__/tutility/char_conv.cpp.s
 .PHONY : __/tutility/char_conv.cpp.s
 
+json_config_loader.o: json_config_loader.cpp.o
+.PHONY : json_config_loader.o
+
+# target to build an object file
+json_config_loader.cpp.o:
+	cd /home/tyh/MyGit/Servers/TServerBaseEx && $(MAKE) -f Test/CMakeFiles/test.out.dir/build.make Test/CMakeFiles/test.out.dir/json_config_loader.cpp.o
+.PHONY : json_config_loader.cpp.o
+
+json_config_loader.i: json_config_loader.cpp.i
+.PHONY : json_config_loader.i
+
+# target to preprocess a source file
+json_config_loader.cpp.i:
+	cd /home/tyh/MyGit/Servers/TServerBaseEx && $(MAKE) -f Test/CMakeFiles/test.out.dir/build.make Test/CMakeFiles/test.out.dir/json_config_loader.cpp.i
+.PHONY : json_config_loader.cpp.i
+
+json_config_loader.s: json_config_loader.cpp.s
+.PHONY : json_config_loader.s
+
+# target to generate assembly for a file
+json_config_loader.cpp.s:
+	cd /home/tyh/MyGit/Servers/TServerBaseEx && $(MAKE) -f Test/CMakeFiles/test.out.dir/build.make Test/CMakeFiles/test.out.dir/json_config_loader.cpp.s
+.PHONY : json_config_loader.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -688,6 +712,9 @@ help:
 	@echo "... __/tutility/char_conv.o"
 	@echo "... __/tutility/char_conv.i"
 	@echo "... __/tutility/char_conv.s"
+	@echo "... json_config_loader.o"
+	@echo "... json_config_loader.i"
+	@echo "... json_config_loader.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
