@@ -11,7 +11,10 @@ INCLUDE_DIRECTORIES(/usr/local/include/)
 INCLUDE_DIRECTORIES(/usr/include/)
 INCLUDE_DIRECTORIES(/usr/include/cppconn/)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/ThirdParty/jsoncpp/include/)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/ThirdParty/mysql_connector/include)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/ThirdParty/mysql_connector/include/cppconn)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/TServerBaseEx/)
+#INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/ThirdParty/google_protobuf/)
 
 #打印消息
 MESSAGE(status ,"---设置头文件包含路径----")
@@ -20,13 +23,18 @@ MESSAGE(status ,"/usr/local/include/boost/")
 MESSAGE(status ,"/usr/local/include/")
 MESSAGE(status ,"/usr/include/")
 MESSAGE(status ,"/usr/include/cppconn/")
+#本地第三方包含路径
 MESSAGE(status ,"${PROJECT_SOURCE_DIR}/ThirdParty/jsoncpp/include/")
-
+MESSAGE(status ,"${PROJECT_SOURCE_DIR}/ThirdParty/mysql_connector/include/")
+MESSAGE(status ,"${PROJECT_SOURCE_DIR}/ThirdParty/mysql_connector/include/cppconn")
+MESSAGE(status , "${PROJECT_SOURCE_DIR}/ThirdParty/google_protobuf")
 #设置库文件包含路径
 LINK_DIRECTORIES(/usr/local/lib/)
 LINK_DIRECTORIES(/usr/local/lib64/)
 LINK_DIRECTORIES(/usr/lib/)
 LINK_DIRECTORIES(/usr/lib64/)
+LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/ThirdParty/mysql_connector/lib)
+LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/ThirdParty/google_protobuf/lib)
 #LINK_DIRECTORIES(../ThirdParty/jsoncpp/lib/)
 
 MESSAGE(status ,"---设置库文件包含路径----")

@@ -1,0 +1,8 @@
+syntax = "proto2";
+package protos;
+
+message TestData
+{
+	optional int32 id = 1 [default = 0];
+	optional string name = 2 [default = ""];
+}

@@ -30,15 +30,16 @@
 
 #源文件
 FILE(GLOB MAIN_SRC ${PROJECT_SOURCE_DIR}/Test/*.cpp)
+FILE(GLOB PROTO_SRC ${PROJECT_SOURCE_DIR}/Test/*.cc)
 
 #生成可执行文件
 ADD_EXECUTABLE(test.out ${LOG_SRC} ${MAIN_SRC} ${BASE_SERVER_SRC} 
 ${BASE_CONFIG_SRC} ${CONFIG_SRC} ${CONNECTION_SRC} ${MYSQLPOOL_SRC} 
 ${PACKET_SRC} ${SERVICEPOOL_SRC} ${SINGLETON_SRC} ${SOCKET_SRC} 
-${SYNERGYWORKER_SRC} ${TIMER_SRC} ${TIMETOOL_SRC} ${UTILITY_SRC} ${MYSQLPOOL_SRC})
+${SYNERGYWORKER_SRC} ${TIMER_SRC} ${TIMETOOL_SRC} ${UTILITY_SRC} ${MYSQLPOOL_SRC} ${PROTO_SRC})
 
 #链接库文件
-TARGET_LINK_LIBRARIES(test.out libboost_system.so libboost_log.so libboost_log_setup.so libboost_thread.so libpthread.so libboost_chrono.so libmysqlcppconn.so ${JSONCPP_LIB})
+TARGET_LINK_LIBRARIES(test.out libboost_system.so libboost_log.so libboost_log_setup.so libboost_thread.so libpthread.so libboost_chrono.so libmysqlcppconn.so libprotobuf.so ${JSONCPP_LIB})
 
 #设置输出路径
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

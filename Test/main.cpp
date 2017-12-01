@@ -2,6 +2,7 @@
 #include "tlog/tboost_log.h"
 #include "json/json.h"
 #include "json_config_loader.h"
+#include "test.pb.h"
 
 class MyConfigManager : public JsonConfigLoader
 {
@@ -33,5 +34,10 @@ int main(int argc, char* argv[])
 	MyConfigManager myconfig;
 	myconfig.LoadFile("config_test.txt");
 
+	LOGGER(INFO) << "TEST GOOGLE PROTOBUF";
+	protos::TestData pb_data;
+	pb_data.set_id(1);
+	pb_data.set_name("Tom");
+	LOGGER(DEBUG) << "id:" << pb_data.id() << ", name:" << pb_data.name();
 	return 0;
 }
