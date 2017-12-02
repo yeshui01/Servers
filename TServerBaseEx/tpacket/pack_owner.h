@@ -23,23 +23,33 @@
 namespace tyh {
 
 typedef boost::shared_ptr < PackBufferCell< NORMAL_PACK_BUFFER_SIZE > > PackBufferPtr;
-typedef std::deque< PackBufferPtr > PacketBufferQueue;
+//typedef std::deque< PackBufferPtr > PacketBufferQueue;
+typedef std::vector< PackBufferPtr > PacketBufferQueue;
+
+#define DEFAULT_PACK_QUEUE_SIZE (2000)
 
 class PackBufferOwner : public Nocopyable {
 public:
-  PackBufferOwner() {}
+  PackBufferOwner() 
+	{
+		// 初始化数据包队列最大空间
+		pack_buffer_queue_.resize(DEFAULT_PACK_QUEUE_SIZE);		
+	}
   ~PackBufferOwner() {}
  
 public:
   bool PushPackBuffer(PackBufferPtr pack_buff_ptr);
   bool IsEmpty();
   bool PopPackBuffer(PackBufferPtr & r_ptr_);
-
+	
 protected:
   PacketBufferQueue pack_buffer_queue_;
 
 private:
   boost::mutex mutex_;
+	// 改用循环队列
+	size_t queue_read_index_ = 0;	
+	size_t queue_write_index_ = 0;	
 };
 
 
