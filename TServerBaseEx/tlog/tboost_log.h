@@ -63,7 +63,7 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(MyLogger, src::severity_logger_mt<LogLeve
 // interface for init logger
 class TBoostLogger {
  public:     
-  static void InitLogger(std::string program_name); 
+  static void InitLogger(std::string program_name, bool console_out = true); 
 };
 
 // define use macro

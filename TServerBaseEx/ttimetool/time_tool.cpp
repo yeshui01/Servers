@@ -7,6 +7,7 @@
  *******************************************/
 
 #include "time_tool.h"
+#include "../tbase/common_define.h"
 
 namespace tyh {
 

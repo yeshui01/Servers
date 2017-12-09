@@ -164,12 +164,14 @@ void LoggerInit::RegisterFileSink(std::string program_name) {
 }
 
 // --------------------------------------------------------
-void TBoostLogger::InitLogger(std::string program_name) {
+void TBoostLogger::InitLogger(std::string program_name, bool console_out) {
   static unsigned s_init_cout = 0;
   if (0 == s_init_cout) {
     LoggerInit::AddCommAttr();
     static LoggerInit init_logger;
-    init_logger.RegisterConsoleSink(program_name);
+		if (console_out)
+    	init_logger.RegisterConsoleSink(program_name);
+
     init_logger.RegisterFileSink(program_name);
     s_init_cout++;
   }
