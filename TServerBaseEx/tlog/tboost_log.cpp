@@ -35,8 +35,8 @@ class LoggerInit{
   ~LoggerInit() {}
  friend class TBoostLogger;
  protected:
-  void RegisterConsoleSink();
-  void RegisterFileSink();
+  void RegisterConsoleSink(std::string program_name);
+  void RegisterFileSink(std::string program_name);
  
  private:
   static void AddCommAttr();
@@ -125,7 +125,7 @@ void LoggerInit::TFileFormatter(logging::record_view const & rec,
   strm << rec[expr::smessage]; 
 }
 
-void LoggerInit::RegisterConsoleSink() {
+void LoggerInit::RegisterConsoleSink(std::string program_name) {
   try {
     typedef sinks::synchronous_sink<sinks::text_ostream_backend> text_sink;
     boost::shared_ptr<text_sink> console_sink(new text_sink);
@@ -140,11 +140,11 @@ void LoggerInit::RegisterConsoleSink() {
   }
 }
 
-void LoggerInit::RegisterFileSink() {
+void LoggerInit::RegisterFileSink(std::string program_name) {
   try {
     typedef sinks::synchronous_sink<sinks::text_file_backend> text_sink;
     boost::shared_ptr<text_sink> sink(new text_sink(
-           keywords::file_name = "lg%Y%m%d_%5N.log",
+           keywords::file_name = program_name + "_%Y%m%d_%5N.log",
            keywords::rotation_size = 3*1024*1024  
           ));
     sink->locked_backend()->set_file_collector(sinks::file::make_collector(
@@ -169,8 +169,8 @@ void TBoostLogger::InitLogger(std::string program_name) {
   if (0 == s_init_cout) {
     LoggerInit::AddCommAttr();
     static LoggerInit init_logger;
-    init_logger.RegisterConsoleSink();
-    init_logger.RegisterFileSink();
+    init_logger.RegisterConsoleSink(program_name);
+    init_logger.RegisterFileSink(program_name);
     s_init_cout++;
   }
 }

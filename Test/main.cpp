@@ -23,7 +23,7 @@ bool MyConfigManager::LoadRowData(const Json::Value &row_data)
 
 int main(int argc, char* argv[])
 {
-	TBoostLogger::InitLogger("main");
+	TBoostLogger::InitLogger("Test");
 	std::cout << "this is used for test ..." << std::endl;
 	LOGGER(INFO) << "this is [INFO] log";
 	LOGGER(DEBUG) << "this is [DEBUG] log";
