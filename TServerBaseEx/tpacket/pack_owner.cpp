@@ -13,10 +13,13 @@ namespace tyh {
 bool PackBufferOwner::PushPackBuffer(PackBufferPtr pack_buff_ptr) {
   //boost::unique_lock<boost::mutex> scoped_lock(mutex_);
   //pack_buffer_queue_.push_back(pack_buff_ptr);
-
-	queue_write_index_ %= pack_buffer_queue_.size();											
+	
+	if (queue_write_index_ > 0)
+	{
+		queue_write_index_ %= pack_buffer_queue_.size();											
+	}
 	pack_buffer_queue_[queue_write_index_++] = pack_buff_ptr;	
-	queue_write_index_ %= pack_buffer_queue_.size();											
+	//queue_write_index_ %= pack_buffer_queue_.size();											
   return true;
 }
 
@@ -39,12 +42,15 @@ bool PackBufferOwner::PopPackBuffer(PackBufferPtr & r_ptr_) {
 	ret = true;
   }
 	*/
-	queue_read_index_ %= pack_buffer_queue_.size();
+	if (queue_read_index_ > 0)
+	{
+		queue_read_index_ %= pack_buffer_queue_.size();
+	}
 	if (queue_read_index_ == queue_write_index_)
 		return false;
 	r_ptr_ = pack_buffer_queue_[queue_read_index_];
 	pack_buffer_queue_[queue_read_index_++].reset();
-	queue_read_index_ %= pack_buffer_queue_.size();
+	//queue_read_index_ %= pack_buffer_queue_.size();
 	ret = true;
   return ret;
 }
