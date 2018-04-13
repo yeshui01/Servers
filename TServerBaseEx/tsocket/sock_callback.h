@@ -30,7 +30,7 @@ class SockAsyncCallBackHandler : public Nocopyable {
 	void SetBufferSize(size_t buffer_len);
 	size_t DataLength() const { return cur_data_len_; }
 	void Clear() { cur_data_len_ = 0; }
-
+	void GrowSize(size_t to_grow_size = 1);
 	template <typename T>
 	T GetHead() {
 	  T* head_pt = reinterpret_cast<T*>(data_buffer_);
