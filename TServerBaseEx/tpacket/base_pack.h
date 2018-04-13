@@ -10,7 +10,7 @@
 #define __TYH_BASE_PACK_H__
 
 #include <cassert>
-#include <memory>
+#include <memory.h>
 #include "tbase/ttypedef.h"
 
 namespace tyh {
@@ -22,29 +22,45 @@ MID_PACK_BUFFER_SIZE = 16384,		// 16K
 MAX_PACK_BUFFER_SIZE = 64512		// 63K
 };
 
-template <PackBufferSize pack_size = MIN_PACK_BUFFER_SIZE>
+//template <size_t pack_size = MIN_PACK_BUFFER_SIZE>
 class PackBufferCell {
 public:
-  PackBufferCell() {
-	read_indx_ = 0;
-	write_indx_ = 0;
-	buffer_size_ = pack_size;
+  PackBufferCell() 
+	{
+		read_indx_ = 0;
+		write_indx_ = 0;
+		//buffer_size_ = pack_size;
+		buffer_size_ = MIN_PACK_BUFFER_SIZE;
+		AllocateMemery();
   }
 
-  ~PackBufferCell() {}
+	PackBufferCell(size_t buff_size)
+	{
+		read_indx_ = 0;
+		write_indx_ = 0;
+		buffer_size_ = buff_size;
+		AllocateMemery();
+	}
 
-  bool AppendData(char *data, uint32 len) {
-	uint32 final_len = ((buffer_size_ - write_indx_) < len) ? 
-	  (buffer_size_ - write_indx_) : (len);
-	if (0 < final_len) {
-	  memcpy(buffer_ + write_indx_, data, final_len);
-	  write_indx_ += final_len;
+  ~PackBufferCell() {
+		if (buffer_)
+			delete [] buffer_, buffer_ = nullptr;
 	}
-	else {
-	  return false;
+
+	bool AppendData(char *data, uint32 len) 
+	{
+		uint32 final_len = ((buffer_size_ - write_indx_) < len) ? (buffer_size_ - write_indx_) : (len);
+		if (0 < final_len) 
+		{
+			memcpy((buffer_ + write_indx_), data, final_len);
+			write_indx_ += final_len;
+		}
+		else 
+		{
+			return false;
+		}
+		return (final_len == len);
 	}
-	return (final_len == len);
-  }
 
   inline const char* buffer() { return buffer_ + read_indx_; }
   inline uint32 length() { return write_indx_ - read_indx_; }
@@ -54,8 +70,16 @@ public:
 	write_indx_ = 0;
   }
 
+protected:
+	void AllocateMemery()
+	{
+		if (buffer_)
+			delete [] buffer_, buffer_ = nullptr;
+
+		buffer_ = new char[buffer_size_];
+	}
 private:
-  char buffer_[pack_size];
+  char *buffer_ = nullptr;
   uint16 read_indx_;
   uint16 write_indx_;
   uint32 buffer_size_;

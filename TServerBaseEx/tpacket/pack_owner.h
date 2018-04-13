@@ -22,7 +22,8 @@
 
 namespace tyh {
 
-typedef boost::shared_ptr < PackBufferCell< NORMAL_PACK_BUFFER_SIZE > > PackBufferPtr;
+//typedef boost::shared_ptr < PackBufferCell< NORMAL_PACK_BUFFER_SIZE > > PackBufferPtr;
+typedef boost::shared_ptr < PackBufferCell > PackBufferPtr;
 //typedef std::deque< PackBufferPtr > PacketBufferQueue;
 typedef std::vector< PackBufferPtr > PacketBufferQueue;
 

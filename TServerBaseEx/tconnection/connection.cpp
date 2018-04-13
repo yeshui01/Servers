@@ -40,7 +40,8 @@ void ReadCallBackHandler::CallBackFun(bool err, size_t transfered_byte) {
 	  }
 	  else if (pack_len == cur_data_len_){
 		// read finished
-		PackBufferPtr pack_buffer_ptr(new PackBufferCell< NORMAL_PACK_BUFFER_SIZE >);
+		size_t all_size = DataLength();
+		PackBufferPtr pack_buffer_ptr(new PackBufferCell(all_size));
 		pack_buffer_ptr->AppendData(data_buffer_, cur_data_len_);
 		connect_pt_->pack_owner().PushPackBuffer(pack_buffer_ptr);
 
