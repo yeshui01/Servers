@@ -41,7 +41,9 @@ void ReadCallBackHandler::CallBackFun(bool err, size_t transfered_byte) {
 	  else if (pack_len == cur_data_len_){
 		// read finished
 		size_t all_size = DataLength();
-		PackBufferPtr pack_buffer_ptr(new PackBufferCell(all_size));
+		//PackBufferPtr pack_buffer_ptr(new PackBufferCell(all_size));
+		PackBufferCell * pack_buffer_ptr = new PackBufferCell(all_size);
+
 		pack_buffer_ptr->AppendData(data_buffer_, cur_data_len_);
 		connect_pt_->pack_owner().PushPackBuffer(pack_buffer_ptr);
 
@@ -187,6 +189,7 @@ bool TConnection::HandleInitState(time_t cur_time) {
 }
 
 bool TConnection::HandleRunState(time_t cur_time) {
+#if 0
   PackBufferPtr pack_buffer_ptr;
   while (pack_owner_.PopPackBuffer(pack_buffer_ptr)) {
 	LOGGER(INFO) << "TConnection::HandleRunState : " << cur_time;
@@ -198,6 +201,24 @@ bool TConnection::HandleRunState(time_t cur_time) {
 	}
 	LOGGER(INFO) << "SendData:" << (pack_content.c_str()+4);
   }
+#endif
+  PackBufferCell * pack_buffer_ptr = pack_owner_.PopPackBuffer();
+	if (pack_buffer_ptr)
+	{
+		LOGGER(INFO) << "TConnection::HandleRunState : " << cur_time;
+
+		std::string pack_content(pack_buffer_ptr->buffer(), pack_buffer_ptr->length());
+		size_t send_len = socket_ptr_->SendData(pack_content.c_str(), pack_content.length());
+		if (0 == send_len) {
+			// the remote sock has closed
+			// TODO:
+		}
+		LOGGER(INFO) << "SendData:" << (pack_content.c_str()+4);
+		
+		delete pack_buffer_ptr;
+		pack_buffer_ptr = nullptr;
+	}
+
   return true;
 }
 

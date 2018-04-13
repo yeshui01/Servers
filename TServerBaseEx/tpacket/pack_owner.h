@@ -25,7 +25,8 @@ namespace tyh {
 //typedef boost::shared_ptr < PackBufferCell< NORMAL_PACK_BUFFER_SIZE > > PackBufferPtr;
 typedef boost::shared_ptr < PackBufferCell > PackBufferPtr;
 //typedef std::deque< PackBufferPtr > PacketBufferQueue;
-typedef std::vector< PackBufferPtr > PacketBufferQueue;
+//typedef std::vector< PackBufferPtr > PacketBufferQueue;
+typedef std::vector< PackBufferCell* > PacketBufferQueue;
 
 #define DEFAULT_PACK_QUEUE_SIZE (2000)
 
@@ -39,15 +40,19 @@ public:
   ~PackBufferOwner() {}
  
 public:
+	// do not use
   bool PushPackBuffer(PackBufferPtr pack_buff_ptr);
-  bool IsEmpty();
+	// do not use
   bool PopPackBuffer(PackBufferPtr & r_ptr_);
-	
+
+  bool IsEmpty();
+	bool PushPackBuffer(PackBufferCell * pack_buffer_pt);
+	PackBufferCell * PopPackBuffer();
 protected:
   PacketBufferQueue pack_buffer_queue_;
-
+	
 private:
-  boost::mutex mutex_;
+  //boost::mutex mutex_;
 	// 改用循环队列
 	size_t queue_read_index_ = 0;	
 	size_t queue_write_index_ = 0;	
